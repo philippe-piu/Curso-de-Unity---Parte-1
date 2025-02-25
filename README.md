@@ -32,6 +32,7 @@
     <li>🔒 Encapsulamento</li>
     <li>🔗 Herança</li>
     <li>🔄 Polimorfismo</li>
+    <li>📂 Namespaces</li>
     <li>📂 List e Dicionário</li>
     <li>⏳ Coroutines</li>
     <li>🌀 Quaternions</li>
