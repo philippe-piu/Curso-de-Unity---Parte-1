@@ -1,0 +1,185 @@
+O que são Propriedades?
+Em C#, uma propriedade é um membro de uma classe que fornece um mecanismo flexível para ler, escrever ou calcular o valor de um campo privado. Elas são usadas como se fossem campos públicos, mas por baixo dos panos, elas podem conter lógica adicional (como validações ou cálculos).
+
+Estrutura de uma Propriedade
+Uma propriedade geralmente tem a seguinte estrutura:
+
+public Tipo NomeDaPropriedade
+{
+    get
+    {
+        // Lógica para retornar o valor
+        return campoPrivado;
+    }
+    set
+    {
+        // Lógica para atribuir o valor
+        campoPrivado = value;
+    }
+}
+
+get: Define como o valor da propriedade é lido.
+
+set: Define como o valor da propriedade é atribuído.
+
+value: Palavra - chave que representa o valor sendo atribuído no set.
+
+Exemplo de Propriedade no Unity
+Vamos usar um exemplo prático no Unity. Imagine que você tem uma classe Player e quer controlar a experiência (exp) do jogador. Em vez de expor o campo exp diretamente, você pode usar uma propriedade para encapsulá-lo.
+
+csharp
+Copy
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    // Campo privado para armazenar a experiência
+    private int exp;
+
+    // Propriedade pública para acessar e modificar a experiência
+    public int Experience
+    {
+        // GET - Retorna o valor da experiência
+        get
+        {
+            return exp;
+        }
+
+        // SET - Define o valor da experiência
+        set
+        {
+            // Garante que a experiência não seja negativa
+            if (value < 0)
+            {
+                exp = 0;
+            }
+            else
+            {
+                exp = value;
+            }
+        }
+    }
+}
+Como Funciona no Unity
+Acesso à Propriedade:
+
+Você pode acessar a propriedade Experience como se fosse um campo público.
+
+Por exemplo:
+
+csharp
+Copy
+Player player = GetComponent<Player>();
+player.Experience = 100; // Usa o set
+Debug.Log(player.Experience); // Usa o get
+Vantagens:
+
+Encapsulamento: O campo exp é privado e só pode ser acessado/modificado através da propriedade Experience.
+
+Validação: No exemplo acima, o set garante que a experiência nunca seja negativa.
+
+Flexibilidade: Você pode adicionar lógica personalizada no get ou set (por exemplo, calcular um valor dinamicamente).
+
+Tipos de Propriedades
+Propriedades com Backing Field:
+
+Usam um campo privado para armazenar o valor.
+
+Exemplo:
+
+csharp
+Copy
+private int life;
+public int Life
+{
+    get { return life; }
+    set { life = value; }
+}
+Propriedades Autoimplementadas:
+
+O compilador cria automaticamente o campo privado.
+
+Exemplo:
+
+csharp
+Copy
+public int Lives { get; set; }
+Propriedades Somente Leitura:
+
+Só possuem um get.
+
+Exemplo:
+
+csharp
+Copy
+public int Level
+{
+    get { return Experience / 1000; }
+}
+Propriedades com Lógica Personalizada:
+
+Podem calcular valores dinamicamente.
+
+Exemplo:
+
+csharp
+
+public int Life
+{
+    get { return Experience / 10; }
+    set { Experience = value * 10; }
+}
+
+Exemplo Completo no Unity
+Aqui está um exemplo completo usando propriedades em um script do Unity:
+
+csharp
+
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    // Campo privado para armazenar a experiência
+    private int exp;
+
+    // Propriedade para acessar e modificar a experiência
+    public int Experience
+    {
+        get { return exp; }
+        set
+        {
+            // Garante que a experiência não seja negativa
+            exp = Mathf.Max(0, value);
+        }
+    }
+
+    // Propriedade somente leitura para o nível do jogador
+    public int Level
+    {
+        get { return Experience / 1000; }
+    }
+
+    // Propriedade autoimplementada para as vidas
+    public int Lives { get; set; }
+
+    // Método Start é chamado no início do jogo
+    void Start()
+    {
+        // Define a experiência inicial
+        Experience = 1500;
+
+        // Exibe o nível do jogador
+        Debug.Log("Nível: " + Level);
+
+        // Define as vidas do jogador
+        Lives = 3;
+        Debug.Log("Vidas: " + Lives);
+    }
+}
+
+Resumo
+Propriedades são uma forma de encapsular campos e adicionar lógica ao acessar ou modificar valores.
+
+Elas são amplamente usadas no Unity para controlar dados de componentes, como vida, experiência, nível, etc.
+
+Propriedades podem ser somente leitura, autoimplementadas ou com lógica personalizada.
