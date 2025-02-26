@@ -59,4 +59,4 @@
 </ol>
 
 <h2>🚀 Comece Agora!</h2>
-<p>Explore os scripts, experimente modificá-los e crie seus próprios projetos utilizando os conceitos aprendidos neste curso. Boa programação! 🎉</p>
+<p>Explore os scripts, experimente modificá-los e crie seus próprios projetos. 🎉</p>
