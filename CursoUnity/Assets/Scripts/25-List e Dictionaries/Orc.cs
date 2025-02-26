@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class Orc : MonoBehaviour
+// Classe que representa um Orc
+public class Orc 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    // Propriedade para armazenar o nome do Orc
+    public string Name;
+    // Propriedade para armazenar o nível do Orc
+    public int Level;
 
-    // Update is called once per frame
-    void Update()
+    // Construtor da classe Orc
+    // Recebe o nome e o nível como parâmetros e os atribui às propriedades
+    public Orc(string name, int level)
     {
-        
-    }
+        Name = name;
+        Level = level;
+    }   
 }
